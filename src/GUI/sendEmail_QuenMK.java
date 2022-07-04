@@ -22,13 +22,13 @@ public class sendEmail_QuenMK {
             // Cấu hình thông tin Email Server
             email.setHostName("smtp.googlemail.com");
             email.setSmtpPort(465);
-            email.setAuthenticator(new DefaultAuthenticator("hellomoinguinhe@gmail.com", "hello135792468")); //Nhớ nhập đúng với tài khoản thật nhé :))
+            email.setAuthenticator(new DefaultAuthenticator("duchuy01102001@gmail.com", "zjctlsbkgtdevjkq")); //Nhớ nhập đúng với tài khoản thật nhé :))
 
             // Với gmail cái này là bắt buộc.
             email.setSSLOnConnect(true);
 
             // Người gửi
-            email.setFrom("hellomoinguinhe@gmail.com", store_name );
+            email.setFrom("duchuy01102001@gmail.com", store_name );
 
             // Tiêu đề
             email.setSubject(tieuDe); //Tiêu đề khi gửi email

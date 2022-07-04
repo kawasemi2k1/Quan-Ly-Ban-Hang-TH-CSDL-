@@ -162,7 +162,7 @@ public class sendMail {
                 + "\n"
                 + "</html>";
         try {
-            sendMail.send("duchuy01102001gmail.com", subject, message, "duchuy01102001gmail.com", "huy01102001");
+            sendMail.send("duchuy01102001gmail.com", subject, message, "duchuy01102001gmail.com", "zjctlsbkgtdevjkq");
         } catch (Exception e) {
             System.out.println("Loi: " + e.toString());
         }
