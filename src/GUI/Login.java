@@ -5,6 +5,7 @@ package GUI;
 
  
 import Utils.ValidateData;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 
@@ -34,6 +36,42 @@ public class Login extends javax.swing.JFrame {
         this.setResizable(false); // not resizeble now
         this.setVisible(true);
         initComponents();
+        AutoSuggestor autoSuggestor = new AutoSuggestor(txt_email, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
+            @Override
+            boolean wordTyped(String typedWord) {
+ 
+                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+                ArrayList<String> words = new ArrayList<>();
+                String tmp;
+                try {
+                Connect a = new Connect();
+                Connection conn = a.getConnectDB();
+                int number;
+                Statement st = conn.createStatement();
+                String sql = "select * from dbo.suggestLogin";
+                PreparedStatement ps;
+                ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                ResultSetMetaData metadata = rs.getMetaData();
+                number = metadata.getColumnCount();
+
+                while (rs.next()) {
+                    for (int i = 1; i <= number; i++) {
+                        System.out.println("+" + rs.getString(i));
+                        words.add(rs.getString(i));
+                    }
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Loi o store" + ex.toString());
+            }
+ 
+                setDictionary(words);
+                //addToDictionary("bye");//adds a single word
+ 
+                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+            }
+        };
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xsize = (int) tk.getScreenSize().getWidth();
         int ysize = (int) tk.getScreenSize().getHeight();
@@ -341,7 +379,16 @@ public class Login extends javax.swing.JFrame {
                     }
                 this.hide(); 
                 }
-                
+                String sql1 = "select * from dbo.suggestLogin where email = ?";
+            PreparedStatement pst1 = conn.prepareCall(sql1);
+            pst1.setString(1, txt_email.getText());
+            ResultSet rs1 = pst1.executeQuery();
+            if(!rs1.next()){
+                String sql2 = "insert into dbo.suggestLogin (email) values (?)";
+            PreparedStatement pst2 = conn.prepareCall(sql2);
+            pst2.setString(1, txt_email.getText());
+            pst2.execute();
+            }
             } else {
                  label_saiTkMK.setText("Sai tài khoản hoặc mật khẩu!");
             }

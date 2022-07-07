@@ -1033,7 +1033,7 @@ public class BanHang extends javax.swing.JPanel {
         jTableBill.setModel(tbnBill);
         
         totalBillPrice += totalSinglePrice;
-        txtTotalBillPrice.setText(vd.DangTienTe(formatter.format(totalSinglePrice)));
+        txtTotalBillPrice.setText(vd.DangTienTe(formatter.format(totalBillPrice)));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
