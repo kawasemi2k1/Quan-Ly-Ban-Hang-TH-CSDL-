@@ -4,6 +4,10 @@
  */
 package GUI; 
 
+import GUI.Controller.Connect;
+import GUI.Extension.Reset;
+import GUI.Main.Main_QuanLy;
+import GUI.Main.Main_NhanVien;
 import java.awt.Window;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
